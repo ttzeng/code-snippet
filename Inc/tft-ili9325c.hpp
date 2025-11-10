@@ -1,11 +1,7 @@
-#ifndef SY_TFT240_HPP
-#define SY_TFT240_HPP
+#ifndef TFT_ILI9325C_HPP
+#define TFT_ILI9325C_HPP
 
-#include "stdint.h"
-
-// Display dimensions
-#define TFT_WIDTH                   240
-#define TFT_HEIGHT                  320
+#include "tft.hpp"
 
 // ILI9325C register definitions
 #define ILI9325_START_OSC           0x00
@@ -59,33 +55,11 @@
 #define ILI9325_PANEL_IF_CTRL5      0x97
 #define ILI9325_PANEL_IF_CTRL6      0x98
 
-// Colors (RGB565 format)
-#define COLOR_BLACK                 0x0000
-#define COLOR_WHITE                 0xFFFF
-#define COLOR_RED                   0xF800
-#define COLOR_GREEN                 0x07E0
-#define COLOR_BLUE                  0x001F
-#define COLOR_YELLOW                0xFFE0
-#define COLOR_CYAN                  0x07FF
-#define COLOR_MAGENTA               0xF81F
-#define COLOR_GRAY                  0x7BEF
-#define COLOR_ORANGE                0xFD20
-#define COLOR_PINK                  0xF81F
-#define COLOR_BROWN                 0xA145
-#define COLOR_MAGENTA               0xF81F
-#define COLOR_CYAN                  0x07FF
-
-typedef void (*mdelay_func) (uint32_t msec);
-
-class sytft240 {
+class tft_ili9325c : public tft {
   public:
-    sytft240& pixel(uint16_t x, uint16_t y, uint16_t color);
-    sytft240& line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-    sytft240& rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint16_t color);
-    sytft240& fill(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint16_t color);
-    sytft240& clear(uint16_t color);
-    sytft240& draw_char(uint16_t x, uint16_t y, char ch, uint16_t color, uint16_t bgcolor);
-    sytft240& draw_string(uint16_t x, uint16_t y, char* str, uint16_t color, uint16_t bgcolor);
+    explicit tft_ili9325c(uint16_t width, uint16_t height) : tft(width, height) {};
+    virtual tft& pixel(int16_t x, int16_t y, uint16_t color);
+    virtual tft& clear(uint16_t color);
   protected:
     void ILI9325C_Init(mdelay_func mdelay);
     void ILI9325C_WriteReg(uint16_t reg, uint16_t data);
@@ -97,4 +71,4 @@ class sytft240 {
     virtual void _OUT(uint16_t v) = 0;
 };
 
-#endif // SY_TFT240_HPP
+#endif  // TFT_ILI9325C_HPP

@@ -1,5 +1,5 @@
 #include "stm32f1xx_hal.h"
-#include "sytft240-blackpill.hpp"
+#include "tft-sytft240-blackpill.hpp"
 
 // Pin definitions for parallel interface
 #define LCD_CS_PORT     GPIOB
@@ -21,17 +21,14 @@
 #define LCD_DATA_PORT   GPIOA
 #define LCD_DATA_PINS   (GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7)
 
-sytft240_Stm32_BlackPill::sytft240_Stm32_BlackPill(mdelay_func mdelay)
+tft_sytft240_blackpill::tft_sytft240_blackpill(mdelay_func mdelay)
+    : tft_ili9325c(SY_TFT240_WIDTH, SY_TFT240_HEIGHT)
 {
     STM32_GPIO_Init();
     ILI9325C_Init(mdelay);
 }
 
-sytft240_Stm32_BlackPill::~sytft240_Stm32_BlackPill()
-{
-}
-
-void sytft240_Stm32_BlackPill::STM32_GPIO_Init(void)
+void tft_sytft240_blackpill::STM32_GPIO_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -66,32 +63,32 @@ void sytft240_Stm32_BlackPill::STM32_GPIO_Init(void)
     _RST(1);
 }
 
-void sytft240_Stm32_BlackPill::_CS(bool on)
+void tft_sytft240_blackpill::_CS(bool on)
 {
     HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, on? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-void sytft240_Stm32_BlackPill::_RS(bool on)
+void tft_sytft240_blackpill::_RS(bool on)
 {
     HAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, on? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-void sytft240_Stm32_BlackPill::_WR(bool on)
+void tft_sytft240_blackpill::_WR(bool on)
 {
     HAL_GPIO_WritePin(LCD_WR_PORT, LCD_WR_PIN, on? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-void sytft240_Stm32_BlackPill::_RD(bool on)
+void tft_sytft240_blackpill::_RD(bool on)
 {
     HAL_GPIO_WritePin(LCD_RD_PORT, LCD_RD_PIN, on? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-void sytft240_Stm32_BlackPill::_RST(bool on)
+void tft_sytft240_blackpill::_RST(bool on)
 {
     HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, on? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-void sytft240_Stm32_BlackPill::_OUT(uint16_t v)
+void tft_sytft240_blackpill::_OUT(uint16_t v)
 {
     // Write high byte
     GPIOA->ODR = (GPIOA->ODR & 0xFF00) | ((v >> 8) & 0xFF);
