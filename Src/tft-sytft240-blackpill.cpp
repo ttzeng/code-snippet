@@ -14,8 +14,8 @@
 #define LCD_RD_PORT     GPIOB
 #define LCD_RD_PIN      GPIO_PIN_11
 
-#define LCD_RST_PORT    GPIOB
-#define LCD_RST_PIN     GPIO_PIN_13
+#define LCD_RST_PORT    GPIOA
+#define LCD_RST_PIN     GPIO_PIN_8
 
 // Data bus pins (PA0-PA7 for 8-bit data)
 #define LCD_DATA_PORT   GPIOA
