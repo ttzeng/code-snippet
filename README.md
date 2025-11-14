@@ -73,7 +73,7 @@ ST7735 Display          STM32F103C8 Black Pill
 | RS/DC | PB1 | RS/DC | Register Select/Data Command |
 | WR | PB10 | WR | Write Enable |
 | RD | PB11 | RD | Read Enable (*optional*) |
-| RST | PB13 | RST | Reset |
+| RST | PA8 | RST | Reset |
 | **Data Bus (8-bit)** |
 | D0-D7 | PA0-PA7 | DB0-DB7 | Parallel Data Bus |
 | **Power** |
@@ -88,7 +88,7 @@ STM32F103C8 Black Pill          ILI9325C TFT LCD
 │ PB1  ───────────────────┼────┤ RS/DC                   │
 │ PB10 ───────────────────┼────┤ WR                      │
 │ PB11 ───────────────────┼────┤ RD                      │
-│ PB13 ───────────────────┼────┤ RST                     │
+│ PA8  ───────────────────┼────┤ RST                     │
 │                         │    │                         │
 │ PA0  ───────────────────┼────┤ DB0                     │
 │ PA1  ───────────────────┼────┤ DB1                     │
@@ -102,4 +102,38 @@ STM32F103C8 Black Pill          ILI9325C TFT LCD
 │ 3.3V ───────────────────┼────┤ VCC                     │
 │ GND  ───────────────────┼────┤ GND                     │
 └─────────────────────────┘    └─────────────────────────┘
+```
+
+# Touch Screen Driver
+
+## API Reference
+
+```
+bool touch_screen::read(int& x, int& y)
+```
+
+## Hardware Connections
+
+### XPT2046 based
+
+#### STM32F103C8 Black Pill
+
+| XPT2046 Pin | STM32 Pin | Function | Description |
+|-------------|-----------|----------|-------------|
+| T_CLK       | PB13      | SPI2_SCK | SPI Clock |
+| T_DO        | PB14      | SPI2_MISO| SPI Data Out |
+| T_DIN       | PB15      | SPI2_MOSI| SPI Data In |
+| T_CS        | PA11      | GPIO_OUT | Chip Select |
+
+```
+XPT2046 Touch Screen          STM32F103C8 Black Pill
+┌─────────────────┐          ┌─────────────────────┐
+│                 │          │                     │
+│  T_CLK     ●────┼──────────┤ PB13 (SPI2_SCK)     │
+│  T_DO      ●────┼──────────┤ PB14 (SPI2_MISO)    │
+│  T_DIN     ●────┼──────────┤ PB15 (SPI2_MOSI)    │
+│  T_CS      ●────┼──────────┤ PA11 (GPIO)         │
+│  GND       ●────┼──────────┤ GND                 │
+│                 │          │                     │
+└─────────────────┘          └─────────────────────┘
 ```
