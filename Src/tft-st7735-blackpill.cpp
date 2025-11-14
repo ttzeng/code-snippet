@@ -1,10 +1,10 @@
 #include "tft-st7735-blackpill.hpp"
 
-tft_st7735_blackpill::tft_st7735_blackpill(SPI_HandleTypeDef *hspi, mdelay_func mdelay, uint8_t rotation)
+tft_st7735_blackpill::tft_st7735_blackpill(SPI_HandleTypeDef *hspi, uint8_t rotation)
 {
     st7735_spi = hspi;
     STM32_GPIO_Init();
-    ST7735_Init(mdelay);
+    ST7735_Init();
     ST7735_SetRotation(rotation);
 }
 
@@ -70,4 +70,9 @@ void tft_st7735_blackpill::_DC(bool state)
 void tft_st7735_blackpill::_CS(bool state)
 {
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, state? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+void tft_st7735_blackpill::mdelay(uint32_t msec)
+{
+    HAL_Delay(msec);
 }

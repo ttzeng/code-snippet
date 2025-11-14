@@ -57,7 +57,7 @@ class tft_st7735 : public tft {
     explicit tft_st7735() : tft(ST7735_HEIGHT, ST7735_WIDTH) {};
     virtual tft& pixel(int16_t x, int16_t y, uint16_t color);
   protected:
-    void ST7735_Init(mdelay_func mdelay);
+    void ST7735_Init();
     void ST7735_SetAddressWindow(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
     void ST7735_SetRotation(uint8_t rotation);
     virtual void ST7735_WriteCommand(uint8_t cmd) = 0;
@@ -66,6 +66,7 @@ class tft_st7735 : public tft {
     virtual void _RST(bool state) = 0;
     virtual void _DC(bool state) = 0;
     virtual void _CS(bool state) = 0;
+    virtual void mdelay(uint32_t msec) = 0;
 };
 
 #endif // TFT_ST7735_HPP

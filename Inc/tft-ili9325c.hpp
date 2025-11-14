@@ -61,7 +61,7 @@ class tft_ili9325c : public tft {
     virtual tft& pixel(int16_t x, int16_t y, uint16_t color);
     virtual tft& clear(uint16_t color);
   protected:
-    void ILI9325C_Init(mdelay_func mdelay);
+    void ILI9325C_Init();
     void ILI9325C_WriteReg(uint16_t reg, uint16_t data);
     virtual void _CS(bool on) = 0;
     virtual void _RS(bool on) = 0;
@@ -69,6 +69,7 @@ class tft_ili9325c : public tft {
     virtual void _RD(bool on) = 0;
     virtual void _RST(bool on) = 0;
     virtual void _OUT(uint16_t v) = 0;
+    virtual void mdelay(uint32_t msec) = 0;
 };
 
 #endif  // TFT_ILI9325C_HPP

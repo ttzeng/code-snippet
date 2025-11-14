@@ -26,8 +26,6 @@ typedef struct {
 
 extern FontDef Font8x8, Font7x10, Font11x18;
 
-typedef void (*mdelay_func) (uint32_t msec);
-
 class tft {
   public:
     explicit tft(uint16_t width, uint16_t height);

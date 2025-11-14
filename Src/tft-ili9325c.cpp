@@ -28,7 +28,7 @@ tft& tft_ili9325c::clear(uint16_t color)
     return *this;
 }
 
-void tft_ili9325c::ILI9325C_Init(mdelay_func mdelay)
+void tft_ili9325c::ILI9325C_Init()
 {
     // Reset display
     _RST(0);

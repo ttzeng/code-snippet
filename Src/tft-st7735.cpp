@@ -10,7 +10,7 @@ tft& tft_st7735::pixel(int16_t x, int16_t y, uint16_t color)
     return *this;
 }
 
-void tft_st7735::ST7735_Init(mdelay_func mdelay)
+void tft_st7735::ST7735_Init()
 {
     // Hardware reset
     _RST(1);

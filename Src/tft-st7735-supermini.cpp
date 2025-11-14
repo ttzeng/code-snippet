@@ -1,9 +1,11 @@
 #include <string.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "driver/gpio.h"
 #include "esp_err.h"
 #include "tft-st7735-supermini.hpp"
 
-tft_st7735_supermini::tft_st7735_supermini(spi_host_device_t spi_host, int pin_cs, int pin_sck, int pin_mosi, int pin_dc, int pin_rst, mdelay_func mdelay, uint8_t rotation)
+tft_st7735_supermini::tft_st7735_supermini(spi_host_device_t spi_host, int pin_cs, int pin_sck, int pin_mosi, int pin_dc, int pin_rst, uint8_t rotation)
     : spi_host(spi_host), spi(0), pin_dc(pin_dc), pin_reset(pin_rst)
 {
     // Initialize GPIO pins
@@ -35,7 +37,7 @@ tft_st7735_supermini::tft_st7735_supermini(spi_host_device_t spi_host, int pin_c
     devcfg.flags = SPI_DEVICE_NO_DUMMY;
     ESP_ERROR_CHECK(spi_bus_add_device(spi_host, &devcfg, &spi));
 
-    ST7735_Init(mdelay);
+    ST7735_Init();
     ST7735_SetRotation(rotation);
 }
 
@@ -104,4 +106,9 @@ void tft_st7735_supermini::_DC(bool state)
 void tft_st7735_supermini::_CS(bool unused)
 {
     // CS is auto driven in the SPI transaction
+}
+
+void tft_st7735_supermini::mdelay(uint32_t msec)
+{
+    vTaskDelay(msec / portTICK_PERIOD_MS);
 }

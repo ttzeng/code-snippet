@@ -21,11 +21,11 @@
 #define LCD_DATA_PORT   GPIOA
 #define LCD_DATA_PINS   (GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7)
 
-tft_sytft240_blackpill::tft_sytft240_blackpill(mdelay_func mdelay)
+tft_sytft240_blackpill::tft_sytft240_blackpill()
     : tft_ili9325c(SY_TFT240_WIDTH, SY_TFT240_HEIGHT)
 {
     STM32_GPIO_Init();
-    ILI9325C_Init(mdelay);
+    ILI9325C_Init();
 }
 
 void tft_sytft240_blackpill::STM32_GPIO_Init(void)
@@ -99,4 +99,9 @@ void tft_sytft240_blackpill::_OUT(uint16_t v)
     GPIOA->ODR = (GPIOA->ODR & 0xFF00) | (v & 0xFF);
     HAL_GPIO_WritePin(LCD_WR_PORT, LCD_WR_PIN, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(LCD_WR_PORT, LCD_WR_PIN, GPIO_PIN_SET);
+}
+
+void tft_sytft240_blackpill::mdelay(uint32_t msec)
+{
+    HAL_Delay(msec);
 }
