@@ -137,3 +137,11 @@ XPT2046 Touch Screen          STM32F103C8 Black Pill
 │                 │          │                     │
 └─────────────────┘          └─────────────────────┘
 ```
+
+# Joystick Driver
+
+## API Reference
+
+```
+void joystick::read(int& x, int& y, bool& button, int normalized)
+```
