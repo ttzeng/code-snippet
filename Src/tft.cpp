@@ -512,7 +512,7 @@ tft& tft::draw_char(int16_t x, int16_t y, char ch, uint16_t color, uint16_t bgco
     return *this;
 }
 
-tft& tft::draw_string(int16_t x, int16_t y, char* str, uint16_t color, uint16_t bgcolor, FontDef* font)
+tft& tft::draw_string(int16_t x, int16_t y, const char* str, uint16_t color, uint16_t bgcolor, FontDef* font)
 {
     uint8_t font_width =  font? font->width  : default_font->width;
     uint8_t font_height = font? font->height : default_font->height;

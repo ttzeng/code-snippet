@@ -11,7 +11,7 @@ tft& tft::clear(uint16_t color)
 tft& tft::circle(int16_t x0, int16_t y0, int16_t r, uint16_t color)
 tft& tft::fill(int16_t x0, int16_t y0, int16_t r, uint16_t color)
 tft& tft::draw_char(int16_t x, int16_t y, char ch, uint16_t color, uint16_t bgcolor, FontDef* font)
-tft& tft::draw_string(int16_t x, int16_t y, char* str, uint16_t color, uint16_t bgcolor, FontDef* font)
+tft& tft::draw_string(int16_t x, int16_t y, const char* str, uint16_t color, uint16_t bgcolor, FontDef* font)
 uint16_t tft::width()
 uint16_t tft::height()
 ```

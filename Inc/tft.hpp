@@ -39,7 +39,7 @@ class tft {
     virtual tft& circle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
     virtual tft& fill(int16_t x0, int16_t y0, int16_t r, uint16_t color);
     virtual tft& draw_char(int16_t x, int16_t y, char ch, uint16_t color, uint16_t bgcolor, FontDef* font = 0);
-    virtual tft& draw_string(int16_t x, int16_t y, char* str, uint16_t color, uint16_t bgcolor, FontDef* font = 0);
+    virtual tft& draw_string(int16_t x, int16_t y, const char* str, uint16_t color, uint16_t bgcolor, FontDef* font = 0);
   protected:
     uint16_t display_width;
     uint16_t display_height;
